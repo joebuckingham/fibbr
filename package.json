@@ -1,0 +1,9 @@
+{
+  "name": "fibbr",
+  "version": "0.0.1",
+  "description": "Lie to your friends.",
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.3.6"
+  }
+}

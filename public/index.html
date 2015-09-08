@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>fibbr</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+  </head>
+
+  <body role="document">
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">fibbr</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div id="div_setup" class="container" role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div id="div_intro" class="jumbotron" style="margin-top: 100px;">
+        <h1>fibbr</h1>
+        <p>Is a bit of a wankery name for an app, but there we go.</p>
+        <button id="btn_create" type="button" class="btn btn-lg btn-primary">Create a game.</button>
+        <button id="btn_join" type="button" class="btn btn-lg btn-default">Join a game.</button>
+      </div>
+      <div id="div_create" class="jumbotron" style="margin-top: 100px;">
+        <h1>Start a new game.</h1>
+        <p>Pick some options below, and then give the Start button a whack to grab a link you can give your pals.</p>
+        <form>
+      <div class="form-group">
+        <label for="gamepw">Use a password?</label>
+        <input type="email" class="form-control" id="gamepw" placeholder="no password">
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Use idle timer.
+        </label>
+      </div>
+      <button id="btn_start" type="submit" class="btn btn-lg btn-primary">Start the game.</button>
+    </form>
+      </div>
+      <div id="div_join" class="jumbotron" style="margin-top: 100px;">
+        <h1>Join an existing game.</h1>
+        <p>If you've been given a four-letter code, pop it in and hit Join.</p>
+        <button id="btn_joincode" type="button" class="btn btn-lg btn-primary">Join the game.</button>
+      </div>
+    </div>
+    <div class="container" id="div_game">
+      <div class="row" style="margin-top: 80px;">
+        <div class="col-md-8">
+          <div class="jumbotron">
+            <h2>The electric chair was invented by a professional _____ named Alfred Southwick.</h2>
+            <p style="margin-top: 30px;">
+              <button id="btn_answer1" type="submit" class="btn btn-lg btn-default">POTATO</button>
+              <button id="btn_answer2" type="submit" class="btn btn-lg btn-default">HORSE</button>
+              <button id="btn_answer3" type="submit" class="btn btn-lg btn-default">CAKE</button>
+              <button id="btn_answer4" type="submit" class="btn btn-lg btn-default">DENTIST</button>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Players</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item"><span class="glyphicon glyphicon-hourglass" style="padding: 2px; border-radius: 2px; background-color: #FF0000;" aria-hidden="true"></span>&nbsp;&nbsp;<strong>joebucki</strong> 1000 points</li>
+                <li class="list-group-item"><span class="glyphicon glyphicon-ok" style="padding: 2px; border-radius: 2px; background-color: #FF0000;" aria-hidden="true"></span>&nbsp;&nbsp;<strong>not_josh_cox</strong> 2500 points</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-primary" style="height: 100%;">
+        <div class="panel-heading">
+          <h3 class="panel-title">Chat</h3>
+        </div>
+        <div class="panel-body">
+          <div class="well" style="font-size: 12px; height: 100px; overflow-y: scroll; padding: 5px;" id="messages"></div>
+          <form action="" id="chatform">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-2">
+                  <input type="text" class="form-control" id="chatname" placeholder="username" autocomplete="off" />
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="chatinput" placeholder="Type to chat, enter to send." autocomplete="off" />
+                </div>
+                <div class="col-sm-2">
+                  <button type="submit" class="btn btn-default">Send</button>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/fib.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      $('#chatform').submit(function(){
+        socket.emit('chat_msg', $('#chatname').val(), $('#chatinput').val());
+        $('#chatinput').val('');
+        return false;
+      });
+      socket.on('chat_msg', function(usr, msg){
+        $('#messages').append($('<p>').html("<strong>" + usr + ":</strong> " + msg));
+        $('#messages').animate({
+          scrollTop: $('#messages').get(0).scrollHeight}, 2000);
+      });
+      socket.on('chat_alert', function(icn, msg){
+        $('#messages').append($('<p>').html("<span class='glyphicon glyphicon-" + icn + "'></span>&nbsp;" + msg));
+        $('#messages').animate({
+          scrollTop: $('#messages').get(0).scrollHeight}, 2000);
+      });
+    </script>
+  </body>
+</html>
