@@ -5,22 +5,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
     <title>fibbr</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap theme -->
     <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/extras.css" rel="stylesheet">
   </head>
 
   <body role="document">
-
-    <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -38,13 +34,11 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
     </nav>
 
     <div id="div_setup" class="container" role="main">
-
-      <!-- Main jumbotron for a primary marketing message or call to action -->
       <div id="div_intro" class="jumbotron" style="margin-top: 100px;">
         <h1>fibbr</h1>
         <p>Is a bit of a wankery name for an app, but there we go.</p>
@@ -107,26 +101,40 @@
         <div class="panel-body">
           <div class="well" style="font-size: 12px; height: 100px; overflow-y: scroll; padding: 5px;" id="messages"></div>
           <form action="" id="chatform">
-            <div class="form-group">
-              <div class="row">
-                <div class="col-sm-2">
-                  <input type="text" class="form-control" id="chatname" placeholder="username" autocomplete="off" />
-                </div>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="chatinput" placeholder="Type to chat, enter to send." autocomplete="off" />
-                </div>
-                <div class="col-sm-2">
-                  <button type="submit" class="btn btn-default">Send</button>
-                </div>
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="chatname" data-toggle="modal" data-target=".unameModal"><strong>joebuckingham</strong></button>
+              </span>
+              <input type="text" class="form-control" id="chatinput" placeholder="Type to chat, enter to send." autocomplete="off">
+              <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-send"></span></button>
+              </span>
             </div>
           </form>
         </div>
       </div>
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- USERNAME CHANGE MODAL -->
+    <div class="modal fade unameModal" tabindex="-1" role="dialog" aria-labelledby="unameChangeModalLabel" id='unameChangeModal'>
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="unameChangeModalLabel">Change your username</h4>
+          </div>
+          <div class="modal-body">
+            <form action="" id="unameform">
+              <div class="input-group">
+                <input type="text" class="form-control" id="newname" autocomplete="off">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span></button>
+                </span>
+              </div>
+            </form>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
