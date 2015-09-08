@@ -4,7 +4,7 @@ var notifications = 0;
 var focused = true;
 var socket = io();
 var uname = "user";
-var colors = ["#debf56", "#de7d7d", "#7bce95", "#e8994f", "#dc61bf", "#f8e374", "#f6546a", "#1b97ad", "#31abab", "#474545", "#f23d74", "#f4f1a2", "#8deedd", "#dfa6ff", "#b40088"];
+var colors = ["#b9e2f0", "#e2b9f0", "#f0c7b9", "#c7f0b9", "#b9c1f0", "#f0b9dc", "#f0e8b9", "#b9f0cc", "#b9eda6", "#eddaa6"];
 function notifUpdate(add) {
   notifications += add;
   if (notifications > 0 && !focused) {
@@ -75,5 +75,12 @@ $(document).ready(function() {
     $("#chatname").text(uname);
     $('#unameChangeModal').modal('hide');
     return false;
+  });
+  socket.on('userlist', function(list){
+    var towrite = "";
+    for (var i = 0; i < list.length; i++) {
+      towrite = towrite + "<li class='list-group-item'><span class='glyphicon glyphicon-user' style='padding: 2px; border-radius: 2px; background-color: #FF0000;' aria-hidden='true'></span>&nbsp;&nbsp;<strong>" + list[i].name + "</strong> " + list[i].score + " points</li>";
+    }
+    $("#userlist").html(towrite);
   });
 });
